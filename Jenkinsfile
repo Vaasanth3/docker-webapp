@@ -8,8 +8,8 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'mysonar'
         AWS_REGION = 'us-east-1' // Change to your AWS region
-        ECR_REPO_APP = '585768179486.dkr.ecr.us-east-1.amazonaws.com/ourproject/app'
-        ECR_REPO_DB  = '585768179486.dkr.ecr.us-east-1.amazonaws.com/ourproject/db'
+        ECR_REPO_APP = '503015902555.dkr.ecr.us-east-1.amazonaws.com/ourproject/app'
+        ECR_REPO_DB  = '503015902555.dkr.ecr.us-east-1.amazonaws.com/ourproject/db'
     }
     stages {
         stage("Clean") {
@@ -19,7 +19,7 @@ pipeline {
         }
         stage("Code") {
             steps {
-                git "https://github.com/RaviVarma06/dockerwebapp.git"
+                git "https://github.com/Vaasanth3/dockerwebapp.git"
             }
         }
         stage("CQA") {
@@ -28,7 +28,7 @@ pipeline {
                     sh '''mvn clean verify sonar:sonar \
                         -Dsonar.projectKey=docker-webapp \
                         -Dsonar.projectName='docker-webapp' \
-                        -Dsonar.login=sqa_09f5f9a339c85ad4cd189f8c162e3abc9f95c851
+                        -Dsonar.login=sqa_a75f326dd0236ad1ccee447e127ac840a101638a
                     '''
                 }
             }
