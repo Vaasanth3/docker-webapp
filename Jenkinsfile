@@ -33,27 +33,6 @@ pipeline {
       }
     }
 
-    stage('Preflight tools') {
-      steps {
-        sh '''
-          set -euxo pipefail
-          echo "=== Tool versions ==="
-          mvn -v
-          java -version
-          git --version
-          aws --version || true
-          docker --version || true
-          docker-compose --version || true
-          trivy --version || true
-
-          echo "=== Workspace check ==="
-          pwd
-          ls -la
-          test -f pom.xml || { echo "pom.xml not found in $(pwd)"; exit 1; }
-        '''
-      }
-    }
-
     stage('CQA') {
       steps {
         dir(env.WORKSPACE) {
