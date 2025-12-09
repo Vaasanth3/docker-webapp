@@ -20,7 +20,7 @@ pipeline {
         }
         stage("Code") {
             steps {
-                git "https://github.com/Vaasanth3/dockerwebapp.git"
+               git url: 'https://github.com/Vaasanth3/docker-webapp.git', branch: 'master'
             }
         }
         
