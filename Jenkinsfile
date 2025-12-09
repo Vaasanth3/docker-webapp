@@ -17,11 +17,13 @@ pipeline {
                 cleanWs()
             }
         }
-        stage("Code") {
-            steps {
-                git "https://github.com/Vaasanth3/dockerwebapp.git"
-            }
-        }
+       
+    stage('Code') {
+      steps {
+        git url: 'https://github.com/Vaasanth3/docker-webapp.git', branch: 'master'
+      }
+    }
+
         stage("CQA") {
             steps {
                 withSonarQubeEnv('mysonar') {
