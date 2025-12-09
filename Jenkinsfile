@@ -33,21 +33,18 @@ pipeline {
       }
     }
 
-    stage('CQA') {
-      steps {
-        dir(env.WORKSPACE) {
-          // Ensure a SonarQube server named 'mysonar' exists under Manage Jenkins -> Configure System
-          withSonarQubeEnv('mysonar') {
-            sh '''
-              set -euxo pipefail
-              mvn -B -ntp clean verify sonar:sonar \
-                -Dsonar.projectKey=docker-webapp \
-                -Dsonar.projectName="docker-webapp"
-            '''
-          }
+   
+    stage("CQA") {
+            steps {
+                withSonarQubeEnv('mysonar') {
+                    sh '''mvn clean verify sonar:sonar \
+                        -Dsonar.projectKey=docker-webapp \
+                        -Dsonar.projectName='docker-webapp' \
+                        -Dsonar.login=sqa_a75f326dd0236ad1ccee447e127ac840a101638a
+                    '''
+                }
+            }
         }
-      }
-    }
 
     stage('Build') {
       steps {
